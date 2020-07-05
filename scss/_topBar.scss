@@ -1,0 +1,55 @@
+
+.top_bar {
+    display: flex;
+    padding: 10px 20px;
+    color: $themecolor;
+    font-family: 'Nunito', sans-serif;
+
+    & .app_name_container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        & > h2 {
+            margin: 0;
+        }
+    }
+
+    .icons {
+        display: flex;
+
+        .icon_div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            
+            width: 50px;
+            height: 50px;
+
+            &:last-child {
+                justify-content: flex-end; 
+            }
+        }
+    }
+
+    .menu_bar {
+        width: 45%;
+        height: 45%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        
+    
+        .menu_line {
+            height: 3px;
+            width: 100%;
+            background: $themecolor;
+    
+            &:nth-child(2) {
+                width: 50%; /*I have, and use comments. Please o i'm testing and u're stopping my tests* Have u seen it I've reduced it */
+            }
+        }
+    
+    }
+}
