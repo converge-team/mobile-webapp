@@ -1,0 +1,11 @@
+.message_top {
+    width: 100%;
+    padding: $sidepadding;
+    background: white;
+    @include centerize();
+
+    &>div {
+        @include centerize();
+        
+    }
+}

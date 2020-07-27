@@ -1,9 +1,10 @@
 $themecolor: #30f;
-
+$sidepadding: 20px;
 
 body {
     padding: 0;
     margin: 0;
+    font-family: 'Nunito', sans-serif;
 }
 
 * {
@@ -19,15 +20,20 @@ body {
     align-items: center;
     transition: 200ms ease-in-out;
     border-radius: 50%;
+    margin-left: -20px;
 
     &:active {
-    /*   background: rgba(0, 0, 0, .1); */
-        animation-name: showTap;
-        animation-duration: 200ms;
-    }
-
-    &:hover {
-  
         background: rgba(0, 0, 0, .1);
     }
+
+    // &:hover {
+  
+    //     background: rgba(0, 0, 0, .1);
+    // }
   }
+
+@mixin centerize() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
