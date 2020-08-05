@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TopBar from '../_components/TopBar';
+import MessageTopBar from '../_components/MessageTopBar';
+import MessageInput from '../_components/MessageInput';
 
 class MessageScreen extends Component {
     constructor(props) {
@@ -8,26 +11,26 @@ class MessageScreen extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
-            <div className="top_bar">
-                <div className="icon_div start_icon">
-                    <div className="touch_indicator">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                </div>
-                <div className="app_name_container">
-                    <h2 className="app_name">Converge</h2>
-                </div>
-                <div className="icons">
-                    <div className="icon_div last_at_right">
-                        <div className="touch_indicator">
-                            <i className="fas fa-plus"></i>
-                        </div>
-                    </div>
-                </div>
+            <div className="message_screen">
+                <MessageTopBar history={this.props.history} />
+                <MessageInput />
             </div>
         )
     }
 }
 
-export default MessageScreen;
+
+const mapStateToprops = (state, ownProps) => {
+
+    return {
+        data: state.messages.messages[ownProps.match.params.id]
+    }
+}
+
+// const mapDispatch = ()
+
+const ConnectedMessageScreen = connect(mapStateToprops, null)(MessageScreen)
+
+export { ConnectedMessageScreen as MessageScreen };

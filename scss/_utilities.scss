@@ -1,19 +1,46 @@
 $themecolor: #30f;
 $sidepadding: 20px;
+$fontfamily: 'Nunito', sans-serif;
+
+html, #root {
+    height: 100%;
+}
 
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Nunito', sans-serif;
+    font-family: $fontfamily;
+    height: 100%;
 }
 
 * {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+
+    &:active {
+        background: none;
+    }
+}
+
+.icon_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+}
+
 .touch_indicator {
-    width: 40px;
-    height: 40px;
+    width: inherit;
+    height: inherit;
     display: flex;
     justify-content: center;
     background: #fff;

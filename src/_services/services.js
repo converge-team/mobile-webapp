@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:8000"
+const apiUrl = "http://192.168.43.44:8000"
 // console.log(process.env.API_URL)
 function loginUser(username, password) {
     
