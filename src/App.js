@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { HomeScreen } from './screens/home_screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './screens/login_screen';
-import MessageScreen from './screens/MessageScreen';
+import { MessageScreen } from './screens/MessageScreen';
 import PrivateRoute from './_components/PrivateRoute';
 
 import './css/style.css';

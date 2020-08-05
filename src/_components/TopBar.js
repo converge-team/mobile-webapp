@@ -6,33 +6,17 @@ class TopBar extends Component {
         super(props);
     }
 
+
     render() {
-        console.log(this.props.startIcon);
+        const icons = this.props.icons;
         return (
             <div className="top_bar">
+                { this.props.startIcon }
                 <div className="app_name_container">
-                    <h2 className="app_name">Converge</h2>
+                    {this.props.main}
                 </div>
                 <div className="icons last_at_right">
-                    <div className="icon_div">
-                        <div className="touch_indicator">
-                            <i className="fas fa-plus"></i>
-                        </div>
-                    </div>
-                    <div className="icon_div">
-                        <div className="touch_indicator">
-                            <i className="fas fa-search"></i>
-                        </div>
-                    </div>
-                    <div className="icon_div">
-                        <div className="touch_indicator">
-                            <div className="menu_bar">
-                                <div className="menu_line"></div>
-                                <div className="menu_line"></div>
-                                <div className="menu_line"></div>
-                            </div>
-                        </div>
-                    </div>
+                    {icons}
                 </div>
             </div>
         );

@@ -26,11 +26,9 @@
         
     }
     
+
     .icon_div {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        
+
         width: 50px;
         height: 50px;
 
@@ -39,18 +37,14 @@
         }
 
         &.start_icon {
+            width: 40px;
             justify-content: flex-start;
 
             .touch_indicator {
                 margin-left: -10px;
             }
         }
-
-        &.last_at_right {
-            .touch_indicator {
-                margin-right: -10px;
-            }
-        }
+        
     }
 
     .menu_bar {
