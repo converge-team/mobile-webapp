@@ -2,20 +2,21 @@ import { constants } from '../_actions/actions';
 
 const initialMessagesState = {
     fetchedMessages: false,
-    messages: {}
+    messages: []
 };
 
 const messages = (state = initialMessagesState, action) => {
+
     switch(action.type) {
         case constants.FETCHING_MESSAGES:
             return {
                 fetchingMessages: true,
-                messages: {}
+                messages: []
             }
         case constants.FETCHED_MESSAGES:
             return {
                 fetchedMessages: true,
-                messages: action.messages
+                messages: [ ...action.friends ]
             }
         case constants.FETCHED_MESSAGES:
             return {

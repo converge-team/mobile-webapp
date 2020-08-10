@@ -1,4 +1,6 @@
-const apiUrl = "http://192.168.43.44:8000"
+const apiUrl = "http://localhost:8000";
+const api_token = JSON.parse(localStorage.getItem('user')).api_token
+
 // console.log(process.env.API_URL)
 function loginUser(username, password) {
     
@@ -29,7 +31,6 @@ function logoutUser() {
 }
 
 function getAllMessages() {
-    const api_token = JSON.parse(localStorage.getItem('user')).api_token
     return fetch(`${apiUrl}/messages`, {
         headers: {
             "x-access-token": api_token
@@ -46,10 +47,28 @@ function getAllMessages() {
     })
 }
 
+function getFriendsAndMessage() {
+    return fetch(`${apiUrl}/messages/friends`, {
+        headers: {
+            'x-access-token': api_token
+        }
+    })
+    .then(data => data.json())
+    .then(res => {
+        if(res.success) {
+            // console.log('data>>', res);
+            return res.data.friends;
+        } else {
+            throw new Error('Error getting Friends');
+        }
+    })
+}
+
 const service = {
     loginUser,
     logoutUser,
-    getAllMessages
+    getAllMessages,
+    getFriendsAndMessage
 }
 
 export default service

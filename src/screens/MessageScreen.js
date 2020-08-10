@@ -14,7 +14,7 @@ class MessageScreen extends Component {
         console.log(this.props)
         return (
             <div className="message_screen">
-                <MessageTopBar history={this.props.history} />
+                <MessageTopBar history={this.props.history} match={this.props.match} />
                 <MessageInput />
             </div>
         )

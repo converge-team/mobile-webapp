@@ -10,20 +10,9 @@
         align-items: center;
         justify-content: flex-start;
 
-        & > h2 {
+        & > h2, & > .app-name {
             margin: 0;
         }
-    }
-
-    .icons {
-        display: flex;
-
-        &.last_at_right {
-            .touch_indicator {
-                margin-right: -10px;
-            }
-        }
-        
     }
     
 

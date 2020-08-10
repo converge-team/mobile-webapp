@@ -23,6 +23,7 @@
             background: inherit;
             padding: 0;
             font-size: 15px;
+            transition: 1s;
 
             &::placeholder {
                 font-family: $fontfamily;

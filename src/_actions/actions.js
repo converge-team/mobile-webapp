@@ -39,10 +39,10 @@ const fetchingMessages = () => {
     }
 }
 
-const fetchedMessages = (messages) => {
+const fetchedMessages = (friends) => {
     return {
         type: constants.FETCHED_MESSAGES,
-        messages
+        friends
     }
 }
 
@@ -72,9 +72,9 @@ export const fetchAllMessages = () => {
     return dispatch => {
         dispatch(fetchingMessages());
 
-        service.getAllMessages()
-            .then(messages => {
-                dispatch(fetchedMessages(messages))
+        service.getFriendsAndMessage()
+            .then(friends => {
+                dispatch(fetchedMessages(friends))
             })
             .catch(error => {
                 dispatch(messageFetchFail());

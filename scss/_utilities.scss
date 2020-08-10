@@ -26,6 +26,17 @@ a {
     }
 }
 
+.icons {
+    display: flex;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+    
+}
+
 .icon_div {
     display: flex;
     align-items: center;
@@ -57,10 +68,17 @@ a {
   
     //     background: rgba(0, 0, 0, .1);
     // }
-  }
+}
 
-@mixin centerize() {
+.light {
+    color: rgba(0, 0, 0, .5);
+}
+.bold {
+    font-weight: 600;
+}
+
+@mixin centerize($justify: center, $align: center) {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: $justify;
+    align-items: $align;
 }

@@ -21,9 +21,12 @@ class ChatBox extends Component {
                     </div>
                     <div className="indicators">
                         <span className="time_indicator">{this.props.lastMessageTime}</span>
-                        <div className="unread_indicator">
-                            {this.props.unreadCount}
-                        </div>
+                        {
+                            this.props.unreadCount
+                            && <div className="unread_indicator">
+                                {this.props.unreadCount}
+                            </div>
+                        }
                     </div>
                 </div>
             </Link>
