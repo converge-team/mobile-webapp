@@ -1,33 +1,84 @@
 $themecolor: #30f;
+$sidepadding: 20px;
+$fontfamily: 'Nunito', sans-serif;
 
+html, #root {
+    height: 100%;
+}
 
 body {
     padding: 0;
     margin: 0;
+    font-family: $fontfamily;
+    height: 100%;
 }
 
 * {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+
+    &:active {
+        background: none;
+    }
+}
+
+.icons {
+    display: flex;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+    
+}
+
+.icon_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+}
+
 .touch_indicator {
-    width: 40px;
-    height: 40px;
+    width: inherit;
+    height: inherit;
     display: flex;
     justify-content: center;
     background: #fff;
     align-items: center;
     transition: 200ms ease-in-out;
     border-radius: 50%;
+    margin-left: -20px;
 
     &:active {
-    /*   background: rgba(0, 0, 0, .1); */
-        animation-name: showTap;
-        animation-duration: 200ms;
-    }
-
-    &:hover {
-  
         background: rgba(0, 0, 0, .1);
     }
-  }
+
+    // &:hover {
+  
+    //     background: rgba(0, 0, 0, .1);
+    // }
+}
+
+.light {
+    color: rgba(0, 0, 0, .5);
+}
+.bold {
+    font-weight: 600;
+}
+
+@mixin centerize($justify: center, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
