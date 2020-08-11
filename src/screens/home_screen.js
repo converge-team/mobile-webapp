@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchAllMessages } from '../_actions/actions';
+import { screenLoaded } from '../_actions/actions'
 
 import TopBar from '../_components/TopBar';
 import ChatBoxesCover from '../_components/ChatBoxesCover';
@@ -38,6 +39,7 @@ class HomeScreen extends Component {
     }
 
     componentDidMount() {
+        this.props.screenLoaded();
         this.props.fetchMessages();
     }
 
@@ -63,7 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchMessages: () => dispatch(fetchAllMessages())
+        fetchMessages: () => dispatch(fetchAllMessages()),
+        screenLoaded: () => dispatch((screenLoaded('home')))
     }
 }
 

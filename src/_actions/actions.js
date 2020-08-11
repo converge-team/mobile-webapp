@@ -8,8 +8,14 @@ export const constants = {
     LOGOUT: 'LOGOUT',
     FETCHING_MESSAGES: 'FETCHING_MESSAGES',
     FETCHED_MESSAGES: 'FETCHED_MESSAGES',
-    FETCHED_MESSAGES_FAIL: 'FETCHED_MESSAGES_FAIL'
+    FETCHED_MESSAGES_FAIL: 'FETCHED_MESSAGES_FAIL',
+    SCREEN_LOADED: 'SCREEN_LOADED'
 }
+
+export const screenLoaded = (screen) => ({
+    type: constants.SCREEN_LOADED,
+    screen
+})
 
 const loginRequest = (user) => ({
     type: constants.REQUESTING_LOGIN,
