@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TopBar from '../_components/TopBar';
-import MessageTopBar from '../_components/MessageTopBar';
+import SecondaryTopBar from '../_components/SecondaryTopBar';
 import MessageInput from '../_components/MessageInput';
+import { screenLoaded } from '../_actions/actions';
 
 class MessageScreen extends Component {
     constructor(props) {
@@ -10,11 +11,20 @@ class MessageScreen extends Component {
 
     }
 
+    componentDidMount() {
+        console.log(this.props)
+        this.props.screenLoaded();
+    }
+
     render() {
         console.log(this.props)
         return (
             <div className="message_screen">
-                <MessageTopBar history={this.props.history} match={this.props.match} />
+                <SecondaryTopBar 
+                    includeIcon={true}
+                    match={this.props.match}
+                    back="home"
+                />
                 <MessageInput />
             </div>
         )
@@ -25,12 +35,19 @@ class MessageScreen extends Component {
 const mapStateToprops = (state, ownProps) => {
 
     return {
-        data: state.messages.messages[ownProps.match.params.id]
+        data: state.messages.messages[ownProps.match.params.id],
+        screensLoaded: state.screens
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        screenLoaded: () => dispatch(screenLoaded('message_screen'))
     }
 }
 
 // const mapDispatch = ()
 
-const ConnectedMessageScreen = connect(mapStateToprops, null)(MessageScreen)
+const ConnectedMessageScreen = connect(mapStateToprops, mapDispatchToProps)(MessageScreen);
 
 export { ConnectedMessageScreen as MessageScreen };

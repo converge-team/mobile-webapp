@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TopBar from '../_components/TopBar';
+import SecondaryTopBar from '../_components/SecondaryTopBar';
 import { connect } from 'react-redux';
 import ChatBox from '../_components/ChatBox';
 
@@ -16,21 +16,17 @@ class Settings extends Component {
         const { user } = this.props;
         return (
             <div className="settings">
-                <TopBar
-                    startIcon={
-                        <div className="icon_div start_icon" onClick={() => this.props.history.go(-1)}>
-                            <div className="touch_indicator">
-                                <i className="fas fa-chevron-left"></i>
-                            </div>
-                        </div>
-                    }
+                <SecondaryTopBar
                     main={
                         <h3 className="app-name">@{user.username}</h3>
                     }
+                    back="home"
                 />
+
                 {/* the chat box here was borrowed from the main chat box
                    cause they serve the same UI purpose
                 */}
+
                 <div className="chat_box">
                     <div className="profile_picture_div">
                         <div className="img_cover">
