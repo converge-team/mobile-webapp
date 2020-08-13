@@ -58,10 +58,12 @@ class Settings extends Component {
                     </div>
                 </div>
                 <div className="user-info">
-                    <button className="danger" onClick={() => {
-                        this.props.logout();
-                        window.location.reload(false);
-                    }}>Logout</button>
+                    <button className="danger" 
+                        onClick={() => {
+                            this.props.logout();
+                            window.location.reload(false);
+                        }}
+                    >Logout</button>
                 </div>
             </div>
         )

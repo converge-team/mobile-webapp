@@ -63,8 +63,8 @@ class LoginPage extends Component {
                 
                 {
                     this.props.requestingLogin
-                    ? <button type="submit" disabled onClick={this.handleSubmit} >Logging In...</button>
-                    : <button type="submit" onClick={this.handleSubmit} >Submit</button>
+                    ? <button type="submit" className="login" disabled onClick={this.handleSubmit} >Signing In...</button>
+                    : <button type="submit" className="login" onClick={this.handleSubmit} >Sign In</button>
                 }
                 
             </form>

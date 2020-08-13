@@ -88,6 +88,10 @@ button {
         background: red;
     }
 
+    &.login {
+        background: green;
+        border-color: green;
+    }
 }
 
 @mixin centerize($justify: center, $align: center) {
