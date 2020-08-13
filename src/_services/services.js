@@ -1,5 +1,5 @@
 const apiUrl = "http://192.168.43.44:8000";
-const api_token = JSON.parse(localStorage.getItem('user')).api_token
+const user = JSON.parse(localStorage.getItem('user'));
 
 // console.log(process.env.API_URL)
 function loginUser(username, password) {
@@ -33,7 +33,7 @@ function logoutUser() {
 function getAllMessages() {
     return fetch(`${apiUrl}/message`, {
         headers: {
-            "x-access-token": api_token
+            "x-access-token": user.api_token
         }
     })
     .then(data => data.json())
@@ -50,7 +50,7 @@ function getAllMessages() {
 function getFriendsAndMessage() {
     return fetch(`${apiUrl}/message/friends`, {
         headers: {
-            'x-access-token': api_token
+            'x-access-token': user.api_token
         }
     })
     .then(data => data.json())
