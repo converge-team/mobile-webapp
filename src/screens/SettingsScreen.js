@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import { connect } from 'react-redux';
+import { logout } from '../_actions/actions'
 import ChatBox from '../_components/ChatBox';
 
 class Settings extends Component {
@@ -56,6 +57,12 @@ class Settings extends Component {
                         <p className="light">Bio</p>
                     </div>
                 </div>
+                <div className="user-info">
+                    <button className="danger" onClick={() => {
+                        this.props.logout();
+                        window.location.reload(false);
+                    }}>Logout</button>
+                </div>
             </div>
         )
     }
@@ -67,6 +74,12 @@ const mapStateToProps = state => {
     }
 }
 
-const ConnectedSettings = connect(mapStateToProps)(Settings);
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+const ConnectedSettings = connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 export { ConnectedSettings as Settings };

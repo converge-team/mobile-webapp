@@ -77,6 +77,19 @@ a {
     font-weight: 600;
 }
 
+button {
+    padding: 10px 10px;
+    color: white;
+    border: 1px solid;
+
+    &.danger {
+        margin-top: 20px;
+        border-color: red;
+        background: red;
+    }
+
+}
+
 @mixin centerize($justify: center, $align: center) {
     display: flex;
     justify-content: $justify;
