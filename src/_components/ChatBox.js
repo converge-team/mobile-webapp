@@ -17,7 +17,13 @@ class ChatBox extends Component {
                     </div>
                     <div className="info">
                         <h3 className="friend_name">{this.props.name}</h3>
-                        <p className="last_message">{this.props.lastMessage}</p>
+                        <p className="last_message">
+                            {
+                                this.props.typing
+                                ? "typing..."
+                                : this.props.lastMessage
+                            }
+                        </p>
                     </div>
                     <div className="indicators">
                         <span className="time_indicator">{this.props.lastMessageTime}</span>

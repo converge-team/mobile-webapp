@@ -15,6 +15,7 @@ const ChatBoxesCover = ({ persons }) => {
                 name={`${person.first_name} ${person.last_name}`}
                 lastMessage={`${lastMessage.content}`}
                 id={person._id}
+                typing={person.typing}
                 lastMessageTime={
                     dateDifference == 0
                     ? `${lastMessageTime.getHours()}:${lastMessageTime.getMinutes()}`

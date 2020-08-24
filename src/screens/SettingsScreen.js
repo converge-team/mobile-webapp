@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import { connect } from 'react-redux';
-import { logout } from '../_actions/actions'
+import { logout } from '../_actions/auth.actions'
 import ChatBox from '../_components/ChatBox';
 
 class Settings extends Component {

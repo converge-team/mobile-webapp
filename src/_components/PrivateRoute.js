@@ -1,12 +1,16 @@
 import { Route, Redirect } from 'react-router-dom';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
-const PrivateRoute = ({component: Component, ...rest}) => (
+const PrivateRoute = ({ component: Component, socket, ...rest }) => (
+
     <Route {...rest} render={(props) => (
         localStorage.getItem('user')
-        ? <Component {...props} />
-        : <Redirect to='/login' />
-    )}/>
+            ? JSON.parse(localStorage.getItem('user')).is_verified
+                ? <Component socket={socket} {...props} />
+                : <Redirect to="/mailed" />
+            : <Redirect to='/login' />
+    )} />
+
 );
 
 export default PrivateRoute;

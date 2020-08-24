@@ -1,30 +1,33 @@
-import { constants } from '../_actions/actions';
+import { authConstants } from '../_actions/auth.actions';
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-const initialAuthState = user ? { loggedIn: true, requestingLogin: false, user } : {}
+const initialAuthState = user ? { verified: user.is_verified, loggedIn: true, requestingLogin: false, user } : {}
 
 const authentication = (state = initialAuthState, action) => {
     switch(action.type) {
-        case constants.REQUESTING_LOGIN:
+        case authConstants.REQUESTING_LOGIN:
             return {
+                
                 requestingLogin: true,
                 loggedIn: false,
-                user: action.user
             }
-        case constants.LOGIN_SUCCESS:
+        case authConstants.LOGIN_SUCCESS:
             return {
+                verified: action.user.is_verified,
                 loggedIn: true,
                 requestingLogin: false,
                 user: action.user
             }
-        case constants.LOGIN_FAILURE:
+        case authConstants.LOGIN_FAILURE:
             return {
                 loginFail: true,
                 message: action.message
             };
-        case constants.LOGOUT:
+        case authConstants.LOGOUT:
             return {};
+        case authConstants.EMAIL_VERIFIED_FAIL:
+            return { ...state, emailVerification: false };
         
         default:
             return state;

@@ -1,0 +1,89 @@
+$inputheight: 50px;
+
+.sign_up {
+    height: 100%;
+    width: 100%;
+
+    form {
+        width: 100%;
+        padding: 15px $sidepadding;
+
+        .relativer {
+            width: 100%;
+            position: relative;
+            @include centerize();
+
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+
+            .input-icon {
+                font-size: 16px;
+                height: $inputheight;
+                width: 35px;
+                @include centerize($justify: flex-start);
+                border-bottom: 1px solid rgba(0, 0, 0,.5);
+                color: $themecolor;
+            }
+
+            &>input {
+                background: transparent;
+                width: 100%;
+                height: $inputheight;
+                border: none;
+                border-bottom: 1px solid rgba(0, 0, 0,.5);
+                outline: none;
+                font-size: 16px;
+                transition: 300ms;
+                color: rgba(0,0,0, .6);
+                
+
+                &::placeholder {
+                    color: rgba(0,0,0, .6);
+                    font-family: $fontfamily;
+                }
+
+
+                & ~ .focuser  {
+                    width: 0;
+                    height: 2px;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    transition: 200ms;
+                }
+
+                &:focus {
+                    color: $themecolor;
+                }
+
+                &:focus ~ .focuser {
+                    width: 100%;
+                    background: $themecolor;
+                }
+            }
+        }
+
+        button {
+            width: 100%;
+
+            &.sign_up_button {
+                @include centerize();
+                @include button($bg: $themecolor);
+                width: 100%;
+            }
+            &#to_login {
+                @include button($bg: transparent, $bordercolor: rgba(0,0,0,.5));
+                color: rgba(0,0,0,.5)
+            }
+        }
+
+        p {
+            text-align: center;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            opacity: 0.5;
+        }
+    }
+}

@@ -15,7 +15,7 @@ class FriendProfile extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let { screens } = this.props;
 
         if (!screens.message_screen) {
@@ -56,7 +56,7 @@ class FriendProfile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        friend: state.messages.messages.find(person =>
+        friend: state.messages.persons.find(person =>
             person._id == ownProps.match.params.id
         ),
         screens: state.screens

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchAllMessages } from '../_actions/actions';
-import { screenLoaded } from '../_actions/actions'
+import { fetchAllMessages } from '../_actions/message.actions';
+import { screenLoaded } from '../_actions/screen.actions';
 
 import TopBar from '../_components/TopBar';
 import ChatBoxesCover from '../_components/ChatBoxesCover';
@@ -21,7 +21,7 @@ const icons = [
             <i className="fas fa-search"></i>
         </div>
     </div>,
-    <div key={2}className="icon_div">
+    <div key={2} className="icon_div">
         <div className="touch_indicator">
             <div className="menu_bar">
                 <div className="menu_line"></div>
@@ -35,23 +35,33 @@ const icons = [
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
-        
+
     }
 
     componentDidMount() {
+        const { socket } = this.props;
         this.props.screenLoaded();
         this.props.fetchMessages();
     }
 
     render() {
-        return(
+        console.log(this.props);
+        const align = {textAlign: "center", opacity: 0.6}
+        return (
             <div>
                 <TopBar
                     main={mainHeader}
                     icons={icons}
                 />
                 <Navigation />
-                <ChatBoxesCover persons={this.props.messages}/>
+                {
+                    this.props.fetchedMessages
+                        ? this.props.noMessages ?
+                            <p style={align}>You don't have messages yet. Try searching for friends with the search button</p>
+                            : <ChatBoxesCover persons={this.props.persons} />
+                        : <p style={align}>Error while fetching messages</p>
+
+                }
             </div>
         )
     }

@@ -35,7 +35,7 @@ const SecondaryTopBar = ({
             startIcon={
                 screensLoaded[back]
                     ? <StartIcon goBack={goBack} />
-                    : <Link to={mapScreenToRoute[back](id)}>
+                    : <Link style={{color: "#30f"}} to={mapScreenToRoute[back](id)}>
                           <StartIcon />
                       </Link>
             }

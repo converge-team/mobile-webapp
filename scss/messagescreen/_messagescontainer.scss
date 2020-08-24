@@ -1,0 +1,51 @@
+
+.message-cover {
+    width: 100%;
+    height: calc(100% - (70px + 80px));
+
+    // max-height: calc(100% - 180px);;
+    @include centerize($justify: flex-start);
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    padding: 10px $sidepadding;
+
+    .messages-container {
+        width: 100%;
+        
+    }
+    .message-box {
+        width: 100%;
+        @include centerize($justify: flex-end);
+        padding: 10px 0;        
+
+        &.received {
+            justify-content: flex-start;
+            
+            .message-content {
+                border-bottom-left-radius: 6px;
+                border-bottom-right-radius: 20px;
+                background: rgba(0,0,0,.05);
+
+                &>span {
+                    color: #000 !important;
+                }
+            }
+        }
+
+        .message-content {
+            background: lighten($color: $themecolor, $amount: 20);
+            
+            padding: 20px 30px;
+            font-size: 17px;
+            border-radius: 20px;
+            border-bottom-right-radius: 6px;
+            max-width: 70%;
+            box-sizing: unset;
+
+            &>span{
+                color: #fff;
+                overflow-wrap: break-word;
+            }
+        }
+    }
+}
