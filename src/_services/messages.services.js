@@ -1,10 +1,9 @@
-const apiUrl = "http://192.168.43.44:8000";
 
 
 function getMessagesForFriend(id) {
     const user = JSON.parse(localStorage.getItem('user'));
     
-    return fetch(`${apiUrl}/message/individual?id=${id}`, {
+    return fetch(`/message/individual?id=${id}`, {
         headers: {
             "x-access-token": user.api_token
         },
@@ -23,7 +22,7 @@ function getMessagesForFriend(id) {
 function getFriendsAndMessage() {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    return fetch(`${apiUrl}/message/friends`, {
+    return fetch(`/message/friends`, {
         headers: {
             'x-access-token': user.api_token
         }

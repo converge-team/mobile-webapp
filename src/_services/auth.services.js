@@ -1,9 +1,7 @@
-const apiUrl = "http://192.168.43.44:8000";
-
 
 function loginUser(username, password) {
 
-    return fetch(`${apiUrl}/auth/login`, {
+    return fetch(`/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -31,7 +29,7 @@ function logoutUser() {
 
 function registerUser({ username, email, first_name, last_name, password }) {
     console.log('username: ', username)
-    return fetch(`${apiUrl}/auth/register`, {
+    return fetch(`/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -58,7 +56,7 @@ function registerUser({ username, email, first_name, last_name, password }) {
 }
 
 function verifyEmail(key) {
-    return fetch(`${apiUrl}/auth/verify-email/${key}`)
+    return fetch(`/auth/verify-email/${key}`)
     .then(data => data.json())
     .then(res => {
         if (res.success) {
