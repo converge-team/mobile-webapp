@@ -1,5 +1,8 @@
-const apiUrl = $API_URL || "http://localhost:8000";
-console.log('url: ', process.env, ' ', $API_URL);
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'https://convrge.herokuapp.com'
+    : "http://localhost:8000";
+
+console.log('url: ', process.env, ' ', apiUrl);
 
 
 function loginUser(username, password) {
@@ -17,7 +20,7 @@ function loginUser(username, password) {
             console.log('res >>>', res);
             if (res.success) {
                 const user = res.data.user;
-                localStorage.setItem('user', JSON.stringify(user))
+                localStorage.setItem('user456fg£', JSON.stringify(user))
                 return user;
             } else {
                 throw new Error(res.message);
@@ -27,7 +30,7 @@ function loginUser(username, password) {
 }
 
 function logoutUser() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user456fg£')
 }
 
 function registerUser({ username, email, first_name, last_name, password }) {
@@ -45,32 +48,32 @@ function registerUser({ username, email, first_name, last_name, password }) {
             password
         })
     })
-    .then(data => data.json())
-    .then(res => {
-        if (res.success) {
-            const user = res.data.user;
-            console.log('user: ', res.data.user)
-            localStorage.setItem('user', JSON.stringify(user))
-            return user;
-        } else {
-            throw new Error(res.message);
-        }
-    });
+        .then(data => data.json())
+        .then(res => {
+            if (res.success) {
+                const user = res.data.user;
+                console.log('user: ', res.data.user)
+                localStorage.setItem('user456fg£', JSON.stringify(user))
+                return user;
+            } else {
+                throw new Error(res.message);
+            }
+        });
 }
 
 function verifyEmail(key) {
     return fetch(`${apiUrl}/auth/verify-email/${key}`)
-    .then(data => data.json())
-    .then(res => {
-        if (res.success) {
-            const user = res.data.user;
+        .then(data => data.json())
+        .then(res => {
+            if (res.success) {
+                const user = res.data.user;
 
-            localStorage.setItem('user', JSON.stringify(user))
-            return user;
-        } else {
-            throw new Error(res.message);
-        }
-    });
+                localStorage.setItem('user456fg£', JSON.stringify(user))
+                return user;
+            } else {
+                throw new Error(res.message);
+            }
+        });
 }
 
 const authService = {

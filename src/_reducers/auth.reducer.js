@@ -1,6 +1,6 @@
 import { authConstants } from '../_actions/auth.actions';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('user456fg£'));
 
 const initialAuthState = user ? { verified: user.is_verified, loggedIn: true, requestingLogin: false, user } : {}
 

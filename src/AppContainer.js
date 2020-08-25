@@ -27,7 +27,7 @@ class AppContainer extends Component {
 
     async componentDidMount() {
         console.log(this.props)
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user456fg£'));
 
         if (user) {
 
@@ -35,11 +35,15 @@ class AppContainer extends Component {
 
             const token = user.api_token;
 
-            this.socketRef.current = await io.connect('https://convrge.herokuapp.com/', {
+            const apiUrl = process.env.NODE_ENV === 'production'
+                ? 'https://convrge.herokuapp.com/'
+                : "http://localhost:8000/";
+
+            this.socketRef.current = await io.connect(apiUrl, {
                 query: `token=${token}`,
             })
             socket = this.socketRef.current;
-            
+
             this.setState({
                 socketConnected: true
             });
@@ -89,10 +93,10 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = state => (
-    {...state.messages}
+    { ...state.messages }
 );
 
 const connectedAppContainer = connect(mapStateToProps, null)(AppContainer);
 
 export default connectedAppContainer;
-export {socket}
+export { socket }

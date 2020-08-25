@@ -48,7 +48,7 @@ class LoginPage extends Component {
             //if no user in localstorage, show form else redirect
             // to homepage
             
-            !localStorage.getItem('user') ?
+            !localStorage.getItem('user456fg£') ?
             <form className="login_form">
                 {
                     this.props.loginFail && 

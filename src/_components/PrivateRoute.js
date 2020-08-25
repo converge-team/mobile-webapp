@@ -4,8 +4,8 @@ import React from 'react';
 const PrivateRoute = ({ component: Component, socket, ...rest }) => (
 
     <Route {...rest} render={(props) => (
-        localStorage.getItem('user')
-            ? JSON.parse(localStorage.getItem('user')).is_verified
+        localStorage.getItem('user456fg£')
+            ? JSON.parse(localStorage.getItem('user456fg£')).is_verified
                 ? <Component socket={socket} {...props} />
                 : <Redirect to="/mailed" />
             : <Redirect to='/welcome' />
