@@ -35,7 +35,7 @@ class AppContainer extends Component {
 
             const token = user.api_token;
 
-            this.socketRef.current = await io.connect('/', {
+            this.socketRef.current = await io.connect('https://convrge.herokuapp.com/', {
                 query: `token=${token}`,
             })
             socket = this.socketRef.current;

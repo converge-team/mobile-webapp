@@ -1,5 +1,5 @@
-const apiUrl = process.env.API_URL || "http://localhost:8000";
-console.log('url: ', process.env);
+const apiUrl = $API_URL || "http://localhost:8000";
+console.log('url: ', process.env, ' ', $API_URL);
 
 
 function loginUser(username, password) {
