@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, socket, ...rest }) => (
             ? JSON.parse(localStorage.getItem('user')).is_verified
                 ? <Component socket={socket} {...props} />
                 : <Redirect to="/mailed" />
-            : <Redirect to='/login' />
+            : <Redirect to='/welcome' />
     )} />
 
 );
