@@ -10,7 +10,7 @@ function parseDate(d) {
     let dateDiff = currentDate - date;
     
     if(dateDiff < dayDiff) {
-        if(currentDate.getDate() - date.getDate() == 1) {
+        if(currentDate.getDate() - date.getDate() === 1) {
             prefix = 'yesterday at';
         } else {
             prefix = 'today at'

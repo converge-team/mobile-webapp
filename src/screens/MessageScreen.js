@@ -7,21 +7,15 @@ import parseDate from '../utils/parseDate';
 
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import MessageInput from '../_components/MessageInput';
-import { userOnline, userOffline, fetchMessageForFriend, newMessage } from '../_actions/message.actions';
+import { userOnline, userOffline, fetchMessageForFriend } from '../_actions/message.actions';
 import { screenLoaded } from '../_actions/screen.actions';
 import LoadScreen from '../_components/LoadScreen';
-import MessageContainer from '../_components/MessagesContainer';
 import MessagesContainer from '../_components/MessagesContainer';
 
 class MessageScreen extends Component {
-    constructor(props) {
-        super(props);
-        // this.data = React.createRef();
-
-    }
 
     componentDidMount() {
-        const { socket, dispatch, data, match } = this.props;
+        const { dispatch, match } = this.props;
         dispatch(screenLoaded('message_screen'));
         dispatch(fetchMessageForFriend(match.params.id));
 
@@ -54,7 +48,7 @@ class MessageScreen extends Component {
     }
 
     render() {
-        const { socket, persons, fetchedMessagesForPerson, fetchingMessages, fetchMessagesFail } = this.props;
+        const { fetchedMessagesForPerson, fetchingMessages, fetchMessagesFail } = this.props;
         const { id } = this.props.match.params;
         const { data } = this.props;
 
@@ -77,7 +71,7 @@ class MessageScreen extends Component {
                                     <div className="chat_box">
                                         <div className="profile_picture_div">
                                             <div className="img_cover">
-                                                <img src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" className="profile_img" />
+                                                <img src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" className="profile_img" alt={`${data.username}`} />
                                             </div>
                                         </div>
                                         <div className="info">
@@ -120,7 +114,7 @@ const mapStateToprops = (state, ownProps) => {
         ...state.messages,
         data: state.messages.persons && state.messages.persons.find(person => {
             
-            return person._id == ownProps.match.params.id
+            return person._id === ownProps.match.params.id
         }),
         screensLoaded: state.screens
     }

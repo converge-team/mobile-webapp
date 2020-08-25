@@ -33,13 +33,8 @@ const icons = [
 ]
 
 class HomeScreen extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     componentDidMount() {
-        const { socket } = this.props;
         this.props.screenLoaded();
         this.props.fetchMessages();
     }

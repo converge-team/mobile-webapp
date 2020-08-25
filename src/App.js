@@ -17,9 +17,7 @@ import AppContainer from './AppContainer';
 import './css/style.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <Router>

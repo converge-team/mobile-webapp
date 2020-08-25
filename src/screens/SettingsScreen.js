@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import { connect } from 'react-redux';
 import { logout } from '../_actions/auth.actions'
-import ChatBox from '../_components/ChatBox';
 
 class Settings extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     // componentDidMount() {
     //     console.log(this.props.user);
@@ -31,7 +27,7 @@ class Settings extends Component {
                 <div className="chat_box">
                     <div className="profile_picture_div">
                         <div className="img_cover">
-                            <img className="profile_img" src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" />
+                            <img className="profile_img" src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" alt="You"/>
                         </div>
                     </div>
                     <div className="info">

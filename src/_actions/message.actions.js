@@ -95,7 +95,7 @@ export const fetchAllMessages = () => {
             })
             .catch(error => {
                 console.log(error.message)
-                if (error.message == "No_Messages")
+                if (error.message === "No_Messages")
                     return dispatch(noMessage());
                 else
                     dispatch(messageFetchFail());

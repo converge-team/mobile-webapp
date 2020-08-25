@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { newMessage } from '../_actions/message.actions';
 import { socket } from '../AppContainer';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ function MessageInput({ person, dispatch }) {
         const caught = e.target.value;
 
         setTimeout(() => {
-            if (caught == inputRef.current.value) {
+            if (caught === inputRef.current.value) {
 
                 if (socketId)
                     socket.emit('stop_typing', { socketId });

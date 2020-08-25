@@ -57,7 +57,7 @@ class FriendProfile extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         friend: state.messages.persons.find(person =>
-            person._id == ownProps.match.params.id
+            person._id === ownProps.match.params.id
         ),
         screens: state.screens
     }

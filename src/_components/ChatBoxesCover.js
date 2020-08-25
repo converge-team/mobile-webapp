@@ -17,7 +17,7 @@ const ChatBoxesCover = ({ persons }) => {
                 id={person._id}
                 typing={person.typing}
                 lastMessageTime={
-                    dateDifference == 0
+                    dateDifference === 0
                     ? `${lastMessageTime.getHours()}:${lastMessageTime.getMinutes()}`
                     : dateDifference === 1 
                     ? 'Yesterday'

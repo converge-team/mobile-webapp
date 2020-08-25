@@ -6,10 +6,6 @@ import { verifyEmail } from '../_actions/auth.actions'
 
 class ConfirmEmailScreen extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         
         const { dispatch } = this.props;
@@ -29,6 +25,7 @@ class ConfirmEmailScreen extends Component {
 
     render() {
         const { emailVerification } = this.props;
+        console.log('EMAILvERIFICATION: ', emailVerification)
         return (
             <div className="full">
                 {

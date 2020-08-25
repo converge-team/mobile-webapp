@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router-dom';
-import React, { Component, useEffect } from 'react';
+import React from 'react';
 
 const PrivateRoute = ({ component: Component, socket, ...rest }) => (
 

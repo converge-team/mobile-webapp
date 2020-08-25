@@ -45,7 +45,7 @@ const SecondaryTopBar = ({
                         <div className="chat_box">
                             <div className="profile_picture_div">
                                 <div className="img_cover">
-                                    <img src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" className="profile_img" />
+                                    <img src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" className="profile_img" alt="Friend" />
                                 </div>
                             </div>
                             <div className="info">

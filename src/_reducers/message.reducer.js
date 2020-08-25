@@ -33,7 +33,7 @@ const messages = (state = initialMessagesState, action) => {
                 fetchedMessagesForPerson: action.friend._id,
                 persons: state.persons.find(person => person._id === action.friend._id)
                     ? state.persons.map(friend =>
-                        friend._id == action.friend._id ? { ...friend, messages: action.friend.messages, typing: false } : friend
+                        friend._id === action.friend._id ? { ...friend, messages: action.friend.messages, typing: false } : friend
                     ) : [...state.persons, { ...action.friend, typing: false, lastMessage: action.friend.messages[action.friend.messages.length - 1] }]
             };
         case messageConstants.NEW_MESSAGE:

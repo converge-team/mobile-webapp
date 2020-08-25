@@ -63,7 +63,7 @@ class SignUpScreen extends Component {
         let { username, email, password, first_name, last_name } = userObject;
         delete userObject.showPassword;
 
-        if (username == '' || email == '' || password == '' || first_name == '' || last_name == '') {
+        if (username === '' || email === '' || password === '' || first_name === '' || last_name === '') {
             return
         } else {
             e.preventDefault();
