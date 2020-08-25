@@ -1,7 +1,8 @@
+const apiUrl = process.env.API_URL || "http://localhost:8000";
 
 function loginUser(username, password) {
 
-    return fetch(`/auth/login`, {
+    return fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -29,7 +30,7 @@ function logoutUser() {
 
 function registerUser({ username, email, first_name, last_name, password }) {
     console.log('username: ', username)
-    return fetch(`/auth/register`, {
+    return fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -56,7 +57,7 @@ function registerUser({ username, email, first_name, last_name, password }) {
 }
 
 function verifyEmail(key) {
-    return fetch(`/auth/verify-email/${key}`)
+    return fetch(`${apiUrl}/auth/verify-email/${key}`)
     .then(data => data.json())
     .then(res => {
         if (res.success) {

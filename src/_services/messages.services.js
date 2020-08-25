@@ -1,9 +1,10 @@
 
+const apiUrl = process.env.API_URL || "http://localhost:8000";
 
 function getMessagesForFriend(id) {
     const user = JSON.parse(localStorage.getItem('user'));
     
-    return fetch(`/message/individual?id=${id}`, {
+    return fetch(`${apiUrl}/message/individual?id=${id}`, {
         headers: {
             "x-access-token": user.api_token
         },
@@ -22,7 +23,7 @@ function getMessagesForFriend(id) {
 function getFriendsAndMessage() {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    return fetch(`/message/friends`, {
+    return fetch(`${apiUrl}/message/friends`, {
         headers: {
             'x-access-token': user.api_token
         }
