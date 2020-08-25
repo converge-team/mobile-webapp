@@ -1,0 +1,51 @@
+.welcome_screen {
+    width: 100%;
+    height: 100%;
+    padding: 10px $sidepadding;
+    background: $themecolor;
+    position: relative;
+
+    .top {
+        width: 100%;
+        
+        & > h3 {
+            color: white;   
+        }
+    }
+
+    .bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 10px $sidepadding;
+        color: white !important;
+        padding-bottom: 30px;
+        
+        .about {
+            padding-bottom: 20px;
+        }
+        
+        .action_btns {
+            width: 100%;
+            @include centerize();
+            flex-direction: column;
+            
+            a {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px 15px;
+                border-radius: 5px;
+                font-weight: 700;
+                font-size: 15px;
+
+                &:first-child {
+                    color: $themecolor;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}

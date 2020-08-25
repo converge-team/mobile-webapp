@@ -1,0 +1,25 @@
+.mail {
+    width: 100%;
+    height: 100%;
+    @include centerize();
+    flex-direction: column;
+    padding: 0 $sidepadding;
+
+    &>i {
+        font-size: 55px;
+
+        &:first-child {
+            margin-bottom: 15px;
+            color: green;
+        }
+
+        &:nth-child(2) {
+            color: $themecolor;
+            font-size: 70px;
+        }
+    }
+
+    &>p {
+        text-align: center;
+    }
+}

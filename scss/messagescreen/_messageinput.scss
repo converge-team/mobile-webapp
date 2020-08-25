@@ -1,0 +1,63 @@
+
+.message_input {
+    width: 100%;
+    position: fixed;
+    padding: 10px 0;
+    bottom: 0;
+    height: $input_height;
+
+    .message_input_form {
+        @include centerize($justify: space-between);
+        flex-wrap: nowrap;
+        height: 100%;
+        padding: 0 5px;
+        width: 100%;
+        border-radius: 25px;
+
+        .padding {
+            border-radius: 30px;
+            @include centerize();
+            flex-grow: 1;
+            height: 100%;
+            padding: 5px;
+            background: darken(white, 2%);
+        }
+        .input_box {
+            height: 100%;
+            padding: 0 5px;
+            margin: 0;
+            border: 0;
+            outline: none;
+            background: transparent;
+            font-size: 15px;
+            transition: 1s;
+            flex-grow: 1;
+
+            &::placeholder {
+                font-family: $fontfamily;
+                
+            }
+        }
+
+        .icon_div {
+            height: 100%;
+            width: 30px;
+            font-size: 22px;
+            color: $themecolor;
+
+            &:nth-child(2) {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+        }
+
+        .send {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: $themecolor;
+            color: white !important;
+            @include centerize();
+        }
+    }
+}

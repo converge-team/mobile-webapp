@@ -1,0 +1,37 @@
+
+.grid_dock {
+    width: 40%;
+    height: 40%;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-gap: 8px;
+
+    .block {
+        background: $themecolor;
+        border-radius: 50%;
+    }
+}
+
+.chat_box {
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .profile_picture_div {
+        padding-left: 0;
+
+        .img_cover {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .info {
+        height: auto;
+        .friend_name {
+            color: #000;
+        }
+    }
+}

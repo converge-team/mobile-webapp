@@ -1,33 +1,164 @@
 $themecolor: #30f;
+$sidepadding: 20px;
+$fontfamily: 'Nunito', sans-serif;
+$input_height: 80px;
 
+
+html, #root, #main_app {
+    height: 100%;
+}
 
 body {
     padding: 0;
     margin: 0;
+    font-family: $fontfamily;
+    height: 100%;
 }
 
 * {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+
+    &:active {
+        background: none;
+    }
+}
+
+.full {
+    width: 100%;
+    height: 100%;
+}
+
+.icons {
+    display: flex;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+    
+}
+
+.icon_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &.last_at_right {
+        .touch_indicator {
+            margin-right: -10px;
+        }
+    }
+}
+
 .touch_indicator {
-    width: 40px;
-    height: 40px;
+    width: inherit;
+    height: inherit;
     display: flex;
     justify-content: center;
     background: #fff;
     align-items: center;
     transition: 200ms ease-in-out;
     border-radius: 50%;
+    // margin-left: -20px;
 
     &:active {
-    /*   background: rgba(0, 0, 0, .1); */
-        animation-name: showTap;
-        animation-duration: 200ms;
-    }
-
-    &:hover {
-  
         background: rgba(0, 0, 0, .1);
     }
-  }
+
+    // &:hover {
+  
+    //     background: rgba(0, 0, 0, .1);
+    // }
+}
+
+.light {
+    color: rgba(0, 0, 0, .5);
+}
+.bold {
+    font-weight: 600;
+}
+
+button {
+    padding: 10px 10px;
+    border: 1px solid;
+    font-family: $fontfamily;
+    border-radius: 5px;
+    font-weight: 600;
+    outline: none;
+
+    &.danger {
+        margin-top: 20px;
+        border-color: red;
+        background: red;
+        color: white;
+    }
+
+    &.login {
+        background: green;
+        border-color: green;
+    }
+
+    &.white {
+        background: white;
+        border-color: white;
+    }
+
+    &.transparent {
+        background: transparent;
+        border-color: white;
+        color: white !important;
+    }
+}
+
+// wave bottom is shared by both login and signup screens
+.wave-bottom {
+    width: 100%;
+    height: 50%;
+    padding: 10px $sidepadding;
+    background: $themecolor;
+    position: relative;
+
+    .icon_div {
+        color: white;
+        width: 50px;
+        height: 50px;
+
+        .touch_indicator {
+            background: transparent;
+            justify-content: start;
+        }
+    }
+
+    &>h1 {
+        color: white;
+        margin-top: 60px;
+        margin-bottom: 10px;
+        font-size: 27px;
+    }
+
+    &>svg {
+        // position: absolute;
+        top: 100%;
+        left: 0;
+        
+    }
+
+}
+
+@mixin centerize($justify: center, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin button($bordercolor:null, $bg: $themecolor, $color: white) {
+    background: $bg;
+    border-color: $bordercolor or $bg;
+    color: $color;
+}
