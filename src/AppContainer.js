@@ -10,6 +10,8 @@ import { FriendProfile } from './screens/FriendProfile';
 import { MessageScreen } from './screens/MessageScreen';
 import { HomeScreen } from './screens/home_screen';
 import LoadScreen from './_components/LoadScreen';
+import { loginSuccess, logout } from './_actions/auth.actions';
+import service from './_services/services';
 
 // This Component houses all secure roots. So that socket initialization can 
 // happen here only when authenticated.
@@ -20,55 +22,72 @@ class AppContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            socketConnected: false
+            socketConnected: false,
+            error: false
         }
         this.socketRef = React.createRef();
     }
 
     async componentDidMount() {
-        console.log(this.props)
+
+        const { dispatch } = this.props;
+
+        const apiUrl = process.env.NODE_ENV === 'production'
+            ? 'https://convrge.herokuapp.com/'
+            : "/";
+
+
         const user = JSON.parse(localStorage.getItem('user456fg£'));
+        const token = user.api_token;
 
-        if (user) {
+        service.auth.authenticateUser(token)
+            .then(async success => {
+                if (success) {
 
-            const { dispatch } = this.props;
+                    dispatch(loginSuccess(user));
 
-            const token = user.api_token;
+                    this.socketRef.current = await io.connect(apiUrl, {
+                        query: `token=${token}`,
+                    })
+                    socket = this.socketRef.current;
 
-            const apiUrl = process.env.NODE_ENV === 'production'
-                ? 'https://convrge.herokuapp.com/'
-                : "http://localhost:8000/";
+                    this.setState({
+                        socketConnected: true
+                    });
 
-            this.socketRef.current = await io.connect(apiUrl, {
-                query: `token=${token}`,
+                    socket.on('new_msg', ({ username, message }) => {
+                        dispatch(newMessage(username, message));
+                    })
+
+                    socket.on('typing', ({ username }) => {
+                        dispatch(typing(username))
+                    })
+
+                    socket.on('stop_typing', ({ username }) => {
+                        dispatch(stopTyping(username))
+                    });
+
+                    socket.on('online', (data) => {
+                        dispatch(userOnline(data));
+                    })
+
+                    socket.on('offline', (data) => {
+                        dispatch(userOffline(data));
+                    })
+
+
+                } else {
+                    console.log('failure to login')
+                    dispatch(logout());
+                }
             })
-            socket = this.socketRef.current;
-
-            this.setState({
-                socketConnected: true
-            });
-
-            socket.on('new_msg', ({ username, message }) => {
-                dispatch(newMessage(username, message));
+            .catch(error => {
+                console.log('error')
+                this.setState({
+                    error: true
+                })
             })
 
-            socket.on('typing', ({ username }) => {
-                dispatch(typing(username))
-            })
-
-            socket.on('stop_typing', ({ username }) => {
-                dispatch(stopTyping(username))
-            });
-
-            socket.on('online', (data) => {
-                dispatch(userOnline(data));
-            })
-
-            socket.on('offline', (data) => {
-                console.log(data, ' offline')
-                dispatch(userOffline(data));
-            })
-        }
     }
 
     render() {
@@ -84,7 +103,9 @@ class AppContainer extends Component {
                             <PrivateRoute path="/settings" component={Settings} />
                             <PrivateRoute socket={socket} path="/profile/:id" component={FriendProfile} />
                         </Fragment>
-                        : <LoadScreen />
+                        : !this.state.error
+                            ? <LoadScreen homePage={true} />
+                            : <LoadScreen error={true}/>
                 }
 
             </div>

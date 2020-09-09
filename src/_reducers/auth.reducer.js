@@ -22,7 +22,7 @@ const authentication = (state = initialAuthState, action) => {
         case authConstants.LOGIN_FAILURE:
             return {
                 loginFail: true,
-                message: action.message
+                message: "Something went wrong! Check your connection"
             };
         case authConstants.LOGOUT:
             return {};

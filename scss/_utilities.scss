@@ -151,6 +151,14 @@ button {
 
 }
 
+.danger {
+    color: #f00 !important;
+}
+
+.large-icon {
+    font-size: 50px;
+}
+
 @mixin centerize($justify: center, $align: center) {
     display: flex;
     justify-content: $justify;
@@ -161,4 +169,12 @@ button {
     background: $bg;
     border-color: $bordercolor or $bg;
     color: $color;
+}
+
+.centered {
+    @include centerize();
+
+    &.column {
+        flex-direction: column !important;
+    }
 }

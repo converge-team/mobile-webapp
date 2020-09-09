@@ -3,6 +3,40 @@ $inputheight: 50px;
 .sign_up {
     height: 100%;
     width: 100%;
+    position: relative;
+
+
+    @mixin animate($name) {
+        
+    }
+
+    .indicator {
+        position: fixed;
+        @include centerize();
+        top: 8px;
+        left: 50%;
+        width: 70%;
+        height: 45px;
+        background: rgb(207, 90, 90);
+        padding: 5px;
+        transform: translateX(-50%);
+        z-index: 10;
+        border-radius: 8px;
+        animation-name: bounce-out;
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &>span {
+            color: white;
+            font-size: 15px;
+        }
+
+        &.faded {
+            top: -50%;
+            animation-name: bounce-back;
+            animation-timing-function: ease-in-out;
+        }
+    }
 
     form {
         width: 100%;

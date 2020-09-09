@@ -3,6 +3,11 @@
     height: 100%;
     background: #fff;
     @include centerize();
+
+    &>img {
+        height: 230px;
+        width: 230px;
+    }
 }
 
 .spinner {
@@ -103,5 +108,26 @@
     40% {
         -webkit-transform: scale(1.0);
         transform: scale(1.0);
+    }
+}
+
+@keyframes bounce-out {
+    0% {
+        top: -50%;
+    }
+    50% {
+        top: 0%;
+    }
+    100% {
+        top: 8px;
+    }
+}
+
+@keyframes bounce-back {
+    0% {
+        top: 8px;
+    }
+    100% {
+        top: -50%;
     }
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { register } from '../_actions/auth.actions'
+import service from '../_services/services';
 
 import WaveBottom from '../_components/WaveBottom';
 
@@ -16,8 +17,13 @@ class SignUpScreen extends Component {
             first_name: '',
             last_name: '',
             password: '',
-            passwordShown: false
+            passwordShown: false,
+            errorShown: false,
+            usernameValid: null,
+            emailValid: null
         }
+
+        this.indicator = React.createRef();
 
         this.showPassword = this.showPassword.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -27,8 +33,8 @@ class SignUpScreen extends Component {
 
     checkUser() {
         const { user, verified } = this.props;
-        if(user) {
-            if(!verified) {
+        if (user) {
+            if (!verified) {
                 return this.props.history.push('/mailed');
             }
             this.props.history.push('/');
@@ -39,6 +45,13 @@ class SignUpScreen extends Component {
 
     componentDidUpdate() {
         this.checkUser();
+
+        if (this.indicator.current) {
+            setTimeout(() => {
+                console.log('fade now')
+                this.indicator.current.classList.add('faded')
+            }, 6000);
+        }
     }
 
 
@@ -53,17 +66,37 @@ class SignUpScreen extends Component {
         let { name, value } = e.target;
 
         this.setState({
-            [name]: value
+            [name]: value,
+            [`${name}Valid`]: 'fetching'
         });
+
+        if (name === 'username' || name === 'email') {
+            service.auth.checkValidity(name, value)
+                .then(success => {
+                    if (success) {
+                        console.log(success)
+                        this.setState({
+                            [`${name}Valid`]: true
+                        })
+                    } else {
+                        this.setState({
+                            [`${name}Valid`]: false
+                        })
+                    }
+                })
+        }
     }
 
     handleSubmit(e) {
-        
-        let userObject = Object.assign({}, this.state);
-        let { username, email, password, first_name, last_name } = userObject;
-        delete userObject.showPassword;
 
-        if (username === '' || email === '' || password === '' || first_name === '' || last_name === '') {
+        let userObject = Object.assign({}, this.state);
+        let valid = userObject.usernameValid && userObject.emailValid;
+
+        delete userObject.showPassword;
+        delete userObject.usernameValid;
+        delete userObject.emailValid;
+
+        if (Object.values(userObject).includes('') || !valid) {
             return
         } else {
             e.preventDefault();
@@ -74,8 +107,18 @@ class SignUpScreen extends Component {
     render() {
         let { username, email, password, first_name, last_name } = this.state;
 
+        const { loginFail, message } = this.props;
+
         return (
             <div className="sign_up">
+                {
+                    loginFail &&
+                    <div className="indicator" ref={this.indicator}>
+                        <span>
+                            {message}
+                        </span>
+                    </div>
+                }
                 <WaveBottom text="Create Account" />
                 <form>
                     <div className="relativer">
@@ -83,6 +126,17 @@ class SignUpScreen extends Component {
                             <i className="far fa-envelope"></i>
                         </div>
                         <input value={email} name="email" placeholder="Email" onChange={this.handleChange} required />
+                        <div className="input-icon">
+                            {
+                                this.state.emailValid !== null
+                                    ? this.state.emailValid !== 'fetching'
+                                        ? this.state.emailValid && this.state.email
+                                            ? <i className="fas fa-check"></i>
+                                            : <i className="fas fa-times danger"></i>
+                                        : <i className="fas fa-spinner"></i>
+                                    : ''
+                            }
+                        </div>
                         <span className="focuser"></span>
                     </div>
                     <div className="relativer">
@@ -90,6 +144,16 @@ class SignUpScreen extends Component {
                             <i className="far fa-user"></i>
                         </div>
                         <input value={username} name="username" placeholder="Username" onChange={this.handleChange} required />
+                        <div className="input-icon">
+                            {
+                                this.state.usernameValid !== null
+                                    ? this.state.usernameValid !== 'fetching'
+                                        ? this.state.usernameValid && this.state.username
+                                            ? <i className="fas fa-check"></i>
+                                            : <i className="fas fa-times danger"></i>
+                                        : <i className="fas fa-spinner"></i>
+                                    : ''
+                            }                        </div>
                         <span className="focuser"></span>
                     </div>
                     <div className="relativer">

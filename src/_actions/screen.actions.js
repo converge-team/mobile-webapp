@@ -6,3 +6,4 @@ export const screenLoaded = (screen) => ({
     type: screenConstants.SCREEN_LOADED,
     screen
 })
+

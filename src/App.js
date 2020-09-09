@@ -14,7 +14,7 @@ import AppContainer from './AppContainer';
 
 
 
-import './css/style.css';
+import './assets/css/style.css';
 
 class App extends Component {
 

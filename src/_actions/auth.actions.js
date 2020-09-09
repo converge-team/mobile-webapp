@@ -14,7 +14,7 @@ const loginRequest = (user) => ({
     user
 })
     
-const loginSuccess = (user) => ({
+export const loginSuccess = (user) => ({
     type: authConstants.LOGIN_SUCCESS,
     user
 })
@@ -75,5 +75,18 @@ export const verifyEmail = (key) => {
             .catch((error) => {
                 dispatch(verifyFailure(error.message));
             })
+    }
+}
+
+export const authenticateUser = (token) => {
+    return dispatch => {
+        service.auth.authenticateUser(token)
+        .then(success => {
+            if(success)
+                dispatch(loginSuccess(JSON.parse(localStorage.getItem('user456fg£')).api_token));
+            else 
+                dispatch(logout());
+        })
+        .then(error => dispatch(loginFailure(error.message)))
     }
 }
