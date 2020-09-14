@@ -12,6 +12,18 @@
         background: rgba(0, 0, 0, .1);
     }
 
+    &.in-menu {
+        margin: 50px 0;
+
+        .profile_picture_div {
+            padding-left: 0;
+        }
+
+        h3 {
+            color: $themecolor !important;
+        }
+    }
+
     .profile_picture_div {
         padding: 0 10px 0 $sidepadding;
 

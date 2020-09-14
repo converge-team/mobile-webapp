@@ -133,14 +133,26 @@
     }
 }
 
-@keyframes slide-out {
+@keyframes slide-in {
     0% {
-        right: -50%;
+        right: -100%;
     }
     50% {
         right: 0;
     }
     100% {
         right: 0;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        right: 0;
+    }
+    50% {
+        right: 0;
+    }
+    100% {
+        right: -100%;
     }
 }

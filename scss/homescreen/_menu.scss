@@ -1,29 +1,40 @@
 
 .menu {
     @include centerize();
+    z-index: 10; 
     width: 100%;
     height: 100%;
     position: fixed;
-    right: 0;
+    right: -100%;
     top: 0;
-    animation-name: slide-out;
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation-duration: 1s;
+    transition: 500ms right cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
-    .closed {
-        
+    &.open {
+        right: 0;
     }
 
     & > div {
-        width: 50%;
         height: 100%;
 
         &.closer {
             background: transparent;
+            width: 15%
         }
         
         &.main {
             background: #fff;
+            width: 85%;
+            padding: 30px ($sidepadding + 10px);
+
+            .top {
+                @include centerize($justify: space-between);
+                
+                i {
+                    color: $themecolor !important;
+                    font-size: 18px;
+                }
+
+            }
         }
     }
 }

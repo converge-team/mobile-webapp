@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
 
 function ChatBox(props) {
     console.log(props.new)
     return (
-        <Link to={`message/${props.id}${props.new ? '?new=true' : ''}`}>
-            <div className="chat_box">
+        
+            <div className={`chat_box ${props.inMenu ? 'in-menu': ''}`} 
+                onClick={
+                    () =>
+                        !props.notLink && props.history.push(`message/${props.id}${props.new ? '?new=true' : ''}`)
+                }
+            >
                 <div className="profile_picture_div">
                     <div className={`img_cover ${props.online ? 'online' : ''}`}>
                         <img className="profile_img" src={props.img_src} alt={`Profile for ${props.name}`} />
@@ -31,9 +37,7 @@ function ChatBox(props) {
                     }
                 </div>
             </div>
-        </Link>
-
     )
 }
 
-export default ChatBox;
+export default withRouter(ChatBox);

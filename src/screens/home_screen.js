@@ -10,6 +10,7 @@ import TopBar from '../_components/TopBar';
 import ChatBoxesCover from '../_components/ChatBoxesCover';
 import Navigation from '../_components/Navigation';
 import Icon from '../_components/Icon';
+import ChatBox from '../_components/ChatBox';
 
 const mainHeader = <h2 className="app_name">Converge</h2>
 
@@ -30,15 +31,16 @@ class HomeScreen extends Component {
         this.props.removeTag();
     }
 
-    toggleMenu() {
-        this.setState(({ menuOpen }) => ({
-            menuOpen: !menuOpen
-        }))
+    toggleMenu(truth) {
+        this.setState({
+            menuOpen: truth
+        })
     }
 
     render() {
-        console.log(this.props);
         const align = { textAlign: "center", opacity: 0.6 }
+        const { name } = this.props;
+
         return (
             <div>
                 <TopBar
@@ -49,7 +51,7 @@ class HomeScreen extends Component {
                             <Icon key={1} name="fas fa-search" push="/search" />,
                             <Icon
                                 key={2}
-                                onClick={this.toggleMenu}
+                                onClick={() => this.toggleMenu(true)}
                                 child={
                                     <div className="menu_bar">
                                         <div className="menu_line"></div>
@@ -70,17 +72,25 @@ class HomeScreen extends Component {
                         : <p style={align}>Error while fetching messages</p>
 
                 }
-                {
-                    this.state.menuOpen &&
-                    <div className="menu">
-                        <div className="closer" onClick={this.toggleMenu}>
 
-                        </div>
-                        <div className="main">
+                <div className={`menu ${this.state.menuOpen ? 'open' : ''}`} >
+                    <div className="closer" onClick={() => this.toggleMenu(false)}>
 
-                        </div>
                     </div>
-                }
+                    <div className="main">
+                        <div className="top">
+                            <Icon name="fas fa-chevron-right" onClick={() => this.toggleMenu(false)} />
+                            <Icon name="fas fa-cog" push="/settings" />
+                        </div>
+                        <ChatBox
+                            inMenu
+                            notLink
+                            img_src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg"
+                            name={name}
+                            lastMessage=''
+                        />
+                    </div>
+                </div>
 
             </div>
         )
@@ -90,7 +100,11 @@ class HomeScreen extends Component {
 
 
 const mapStateToProps = (state) => {
-    return { ...state.messages }
+    return {
+        name: `${state.auth.user.first_name} ${state.auth.user.last_name}`,
+        ...state.messages
+    }
+
 }
 
 const mapDispatchToProps = dispatch => {
