@@ -111,6 +111,7 @@
     }
 }
 
+
 @keyframes bounce-out {
     0% {
         top: -50%;
@@ -129,5 +130,17 @@
     }
     100% {
         top: -50%;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        right: -50%;
+    }
+    50% {
+        right: 0;
+    }
+    100% {
+        right: 0;
     }
 }

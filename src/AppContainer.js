@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 
-import { userOnline, userOffline, typing, stopTyping, newMessage } from './_actions/message.actions'
+import { userOnline, userOffline, typing, stopTyping, newMessage, fetchAllMessages, addFriend, fetchMessageForFriend } from './_actions/message.actions'
 
 import PrivateRoute from './_components/PrivateRoute';
 import { Settings } from './screens/SettingsScreen';
@@ -10,8 +10,12 @@ import { FriendProfile } from './screens/FriendProfile';
 import { MessageScreen } from './screens/MessageScreen';
 import { HomeScreen } from './screens/home_screen';
 import LoadScreen from './_components/LoadScreen';
+
 import { loginSuccess, logout } from './_actions/auth.actions';
+
+
 import service from './_services/services';
+import SearchScreen from './screens/SearchScreen';
 
 // This Component houses all secure roots. So that socket initialization can 
 // happen here only when authenticated.
@@ -29,6 +33,7 @@ class AppContainer extends Component {
     }
 
     async componentDidMount() {
+        console.log(this.props)
 
         const { dispatch } = this.props;
 
@@ -48,15 +53,28 @@ class AppContainer extends Component {
 
                     this.socketRef.current = await io.connect(apiUrl, {
                         query: `token=${token}`,
-                    })
+                    });
                     socket = this.socketRef.current;
+
+                    dispatch(fetchAllMessages());
 
                     this.setState({
                         socketConnected: true
                     });
 
-                    socket.on('new_msg', ({ username, message }) => {
-                        dispatch(newMessage(username, message));
+                    console.log('perrrrsons: ', this.props.persons)
+
+                    socket.on('new_msg', async ({ userId, message }) => {
+                        console.log(userId, ' sent ', message)
+                        const userInAppState = this.props.persons.find(person => (
+                            person._id === userId
+                        ));
+
+                        if(!userInAppState) {
+                            await dispatch(fetchMessageForFriend(userId));
+                        }
+                        
+                        dispatch(newMessage(userId, message));
                     })
 
                     socket.on('typing', ({ username }) => {
@@ -77,12 +95,11 @@ class AppContainer extends Component {
 
 
                 } else {
-                    console.log('failure to login')
+                    console.warn('failure to login')
                     dispatch(logout());
                 }
             })
             .catch(error => {
-                console.log('error')
                 this.setState({
                     error: true
                 })
@@ -102,6 +119,7 @@ class AppContainer extends Component {
                             <PrivateRoute socket={socket} path="/message/:id" exact component={MessageScreen} />
                             <PrivateRoute path="/settings" component={Settings} />
                             <PrivateRoute socket={socket} path="/profile/:id" component={FriendProfile} />
+                            <PrivateRoute path="/search" component={SearchScreen} />
                         </Fragment>
                         : !this.state.error
                             ? <LoadScreen homePage={true} />

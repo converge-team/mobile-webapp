@@ -17,15 +17,10 @@ const messages = (state = initialMessagesState, action) => {
         case messageConstants.FETCHED_MESSAGES:
             return {
                 ...state,
+                fetchedMessagesForPerson: null,
                 fetchingMessages: false,
                 fetchedMessages: true,
-                persons: action.persons.map(person => {
-                    return { 
-                        ...state.persons.find(individual => individual._id === person._id), 
-                        ...person, 
-                        typing: false
-                    }
-                })
+                persons: action.persons
             }
         case messageConstants.FETCHED_FRIEND_MESSAGES:
             return {
@@ -34,14 +29,20 @@ const messages = (state = initialMessagesState, action) => {
                 persons: state.persons.find(person => person._id === action.friend._id)
                     ? state.persons.map(friend =>
                         friend._id === action.friend._id ? { ...friend, messages: action.friend.messages, typing: false } : friend
-                    ) : [...state.persons, { ...action.friend, typing: false, lastMessage: action.friend.messages[action.friend.messages.length - 1] }]
+                    ) : [...state.persons, { ...action.friend, typing: false }]
             };
+
+        case messageConstants.REMOVE_TAG:
+            return {
+                ...state,
+                fetchedMessagesForPerson: null
+            }
         case messageConstants.NEW_MESSAGE:
             return {
                 ...state,
                 persons: state.persons.map(person =>
-                    person.username === action.username
-                        ? { ...person, messages: [action.msgObj, ...person.messages] }
+                    person._id === action.userId
+                        ? { ...person, messages: [...person.messages, action.msgObj] }
                         : person
                 )
             };
@@ -79,6 +80,9 @@ const messages = (state = initialMessagesState, action) => {
             }
         case messageConstants.FETCHED_MESSAGES_FAIL:
             return {
+                ...state,
+                fetchedMessages: false,
+                fetchingMessages: false,
                 fetchMessagesFail: true
             }
         case messageConstants.NO_MESSAGE:

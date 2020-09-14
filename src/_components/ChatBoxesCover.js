@@ -5,7 +5,10 @@ const ChatBoxesCover = ({ persons }) => {
 
     const messageBoxes = persons.map(person => {
         
-        let lastMessage = person.lastMessage //e.g person['jeff'].messages
+        if(person.messages.length === 0) return
+
+
+        let lastMessage = person.messages[person.messages.length-1] //e.g person['jeff'].messages
         let lastMessageTime = new Date(lastMessage.time);
         let dateDifference = new Date().getDay() - lastMessageTime.getDay(); // check difference in date
         return (

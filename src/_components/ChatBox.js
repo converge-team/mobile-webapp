@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function ChatBox(props) {
-
+    console.log(props.new)
     return (
-        <Link to={`message/${props.id}`}>
+        <Link to={`message/${props.id}${props.new ? '?new=true' : ''}`}>
             <div className="chat_box">
                 <div className="profile_picture_div">
                     <div className={`img_cover ${props.online ? 'online' : ''}`}>

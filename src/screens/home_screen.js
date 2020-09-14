@@ -1,52 +1,65 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchAllMessages } from '../_actions/message.actions';
+import { Link } from 'react-router-dom';
+
 import { screenLoaded } from '../_actions/screen.actions';
+import { removeMessageTag } from '../_actions/message.actions'
 
 import TopBar from '../_components/TopBar';
 import ChatBoxesCover from '../_components/ChatBoxesCover';
 import Navigation from '../_components/Navigation';
-
+import Icon from '../_components/Icon';
 
 const mainHeader = <h2 className="app_name">Converge</h2>
-const icons = [
-    <div key={0} className="icon_div">
-        <div className="touch_indicator">
-            <i className="fas fa-plus"></i>
-        </div>
-    </div>,
-    <div key={1} className="icon_div">
-        <div className="touch_indicator">
-            <i className="fas fa-search"></i>
-        </div>
-    </div>,
-    <div key={2} className="icon_div">
-        <div className="touch_indicator">
-            <div className="menu_bar">
-                <div className="menu_line"></div>
-                <div className="menu_line"></div>
-                <div className="menu_line"></div>
-            </div>
-        </div>
-    </div>
-]
 
 class HomeScreen extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            menuOpen: false
+        }
+
+        this.toggleMenu = this.toggleMenu.bind(this)
+    }
+
     componentDidMount() {
         this.props.screenLoaded();
-        this.props.fetchMessages();
+        this.props.removeTag();
+    }
+
+    toggleMenu() {
+        this.setState(({ menuOpen }) => ({
+            menuOpen: !menuOpen
+        }))
     }
 
     render() {
         console.log(this.props);
-        const align = {textAlign: "center", opacity: 0.6}
+        const align = { textAlign: "center", opacity: 0.6 }
         return (
             <div>
                 <TopBar
                     main={mainHeader}
-                    icons={icons}
+                    icons={
+                        [
+                            <Icon key={0} name="fas fa-plus" />,
+                            <Icon key={1} name="fas fa-search" push="/search" />,
+                            <Icon
+                                key={2}
+                                onClick={this.toggleMenu}
+                                child={
+                                    <div className="menu_bar">
+                                        <div className="menu_line"></div>
+                                        <div className="menu_line"></div>
+                                        <div className="menu_line"></div>
+                                    </div>
+                                }
+                            />
+                        ]
+                    }
                 />
                 <Navigation />
                 {
@@ -57,6 +70,18 @@ class HomeScreen extends Component {
                         : <p style={align}>Error while fetching messages</p>
 
                 }
+                {
+                    this.state.menuOpen &&
+                    <div className="menu">
+                        <div className="closer" onClick={this.toggleMenu}>
+
+                        </div>
+                        <div className="main">
+
+                        </div>
+                    </div>
+                }
+
             </div>
         )
     }
@@ -70,8 +95,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchMessages: () => dispatch(fetchAllMessages()),
-        screenLoaded: () => dispatch((screenLoaded('home')))
+        screenLoaded: () => dispatch((screenLoaded('home'))),
+        removeTag: () => dispatch(removeMessageTag())
     }
 }
 

@@ -38,10 +38,12 @@ function MessageInput({ person, dispatch }) {
         const caught = e.target.value;
 
         setTimeout(() => {
-            if (caught === inputRef.current.value) {
+            if(inputRef.current) {
+                if (caught === inputRef.current.value) {
 
-                if (socketId)
-                    socket.emit('stop_typing', { socketId });
+                    if (socketId)
+                        socket.emit('stop_typing', { socketId });
+                }
             }
         }, 1500);
     }
@@ -51,14 +53,14 @@ function MessageInput({ person, dispatch }) {
         if (messageValue.length === 0) return;
 
         socket.emit('new_message', { toUser: person.username, socketId, message: messageValue });
-        dispatch(newMessage(person.username, { content: messageValue, time: new Date(), type: 'sent' }));
+        dispatch(newMessage(person._id, { content: messageValue, time: new Date(), type: 'sent' }));
         setMessageValue('');
 
     }
 
     return (
         <div className="message_input">
-            <form className="message_input_form">
+            <div className="message_input_form">
                 <div className="padding">
                     <input
                         ref={inputRef}
@@ -98,7 +100,7 @@ function MessageInput({ person, dispatch }) {
 
                     }
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

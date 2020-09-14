@@ -1,0 +1,14 @@
+
+.search-input {
+    flex-grow: 1;
+    height: 40px;
+    border: none;
+    font-size: 18px;
+    background: transparent;
+    outline: none;
+    font-family: $fontfamily;
+
+    &::placeholder {
+        font-family: $fontfamily;
+    }
+}

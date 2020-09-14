@@ -96,7 +96,7 @@ button {
         margin-top: 20px;
         border-color: red;
         background: red;
-        color: white;
+        color: white !important;
     }
 
     &.login {

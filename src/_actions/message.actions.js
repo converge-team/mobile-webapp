@@ -11,7 +11,9 @@ export const messageConstants = {
     STOP_TYPING: 'STOP_TYPING',
     USER_ONLINE: 'USER_ONLINE',
     USER_OFFLINE: 'USER_OFFLINE',
-    FETCHED_FRIEND_MESSAGES: 'FETCHED_FRIEND_MESSAGES'
+    FETCHED_FRIEND_MESSAGES: 'FETCHED_FRIEND_MESSAGES',
+    ADD_FRIEND: 'ADD_FRIEND',
+    REMOVE_TAG: 'REMOVE_TAG'
 }
 
 
@@ -28,7 +30,7 @@ const fetchedMessages = (persons) => {
     }
 }
 
-const fetchedMessageForFriend = (friend) => {
+export const fetchedMessageForFriend = (friend) => {
     return {
         type: messageConstants.FETCHED_FRIEND_MESSAGES,
         friend
@@ -65,10 +67,10 @@ export const userOffline = ({username, time}) => {
     }
 }
 
-export const newMessage = (username, msgObj) => {
+export const newMessage = (userId, msgObj) => {
     return {
         type: messageConstants.NEW_MESSAGE,
-        username,
+        userId,
         msgObj
     }
 }
@@ -76,6 +78,12 @@ export const newMessage = (username, msgObj) => {
 const messageFetchFail = () => {
     return {
         type: messageConstants.FETCHED_MESSAGES_FAIL
+    }
+}
+
+export const removeMessageTag = () => {
+    return {
+        type: messageConstants.REMOVE_TAG
     }
 }
 
@@ -118,3 +126,17 @@ export const fetchMessageForFriend = (id) => {
 
     }
 }
+
+export const addFriend = id => {
+    return dispatch => {
+        dispatch(fetchingMessages());
+        service.message.searchDetails(id)
+            .then(friend => {
+                dispatch(fetchedMessageForFriend({...friend, messages: [], unconfirmed: true}));
+                return friend;
+            })
+            .catch(error => {
+                dispatch(messageFetchFail());
+            })
+    }
+} 

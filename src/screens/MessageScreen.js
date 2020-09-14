@@ -4,22 +4,33 @@ import { Link } from 'react-router-dom';
 
 import { socket } from '../AppContainer';
 import parseDate from '../utils/parseDate';
+import query from '../utils/query';
 
-import SecondaryTopBar from '../_components/SecondaryTopBar';
-import MessageInput from '../_components/MessageInput';
-import { userOnline, userOffline, fetchMessageForFriend } from '../_actions/message.actions';
+import { userOnline, userOffline, fetchMessageForFriend, addFriend } from '../_actions/message.actions';
 import { screenLoaded } from '../_actions/screen.actions';
 import LoadScreen from '../_components/LoadScreen';
+
 import MessagesContainer from '../_components/MessagesContainer';
+import SecondaryTopBar from '../_components/SecondaryTopBar';
+import MessageInput from '../_components/MessageInput';
 
 class MessageScreen extends Component {
 
     componentDidMount() {
-        const { dispatch, match } = this.props;
-        dispatch(screenLoaded('message_screen'));
-        dispatch(fetchMessageForFriend(match.params.id));
+        const { dispatch, match, location, data } = this.props;
+        
+        console.log('data for unconfirmed: ', data);
 
-        // this.data.current = this.props.persons ? this.props.persons.find(friend => friend._id === id) : null;
+        dispatch(screenLoaded('message_screen'));
+        
+        if(data && data.unconfirmed) {
+            dispatch(addFriend(match.params.id));
+        } else if (query('new', location.search) !== 'true') {
+            dispatch(fetchMessageForFriend(match.params.id));
+        } else {
+            dispatch(addFriend(match.params.id));
+        }
+
     }
 
     componentDidUpdate() {
@@ -37,6 +48,7 @@ class MessageScreen extends Component {
                 socket.emit('bring_status',
                     { username: data.username },
                     (status) => {
+                        console.log('status: ', status)
                         if (status.id)
                             dispatch(userOnline(status));
                         else
@@ -113,7 +125,7 @@ const mapStateToprops = (state, ownProps) => {
     return {
         ...state.messages,
         data: state.messages.persons && state.messages.persons.find(person => {
-            
+
             return person._id === ownProps.match.params.id
         }),
         screensLoaded: state.screens

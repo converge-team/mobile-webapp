@@ -6,6 +6,7 @@ import { register } from '../_actions/auth.actions'
 import service from '../_services/services';
 
 import WaveBottom from '../_components/WaveBottom';
+import Indicator from '../_components/Indicator';
 
 class SignUpScreen extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class SignUpScreen extends Component {
             emailValid: null
         }
 
-        this.indicator = React.createRef();
+        // this.indicator = React.createRef();
 
         this.showPassword = this.showPassword.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -46,12 +47,12 @@ class SignUpScreen extends Component {
     componentDidUpdate() {
         this.checkUser();
 
-        if (this.indicator.current) {
-            setTimeout(() => {
-                console.log('fade now')
-                this.indicator.current.classList.add('faded')
-            }, 6000);
-        }
+        // if (this.indicator.current) {
+        //     setTimeout(() => {
+        //         console.log('fade now')
+        //         this.indicator.current.close();
+        //     }, 6000);
+        // }
     }
 
 
@@ -105,6 +106,7 @@ class SignUpScreen extends Component {
     }
 
     render() {
+
         let { username, email, password, first_name, last_name } = this.state;
 
         const { loginFail, message } = this.props;
@@ -113,11 +115,7 @@ class SignUpScreen extends Component {
             <div className="sign_up">
                 {
                     loginFail &&
-                    <div className="indicator" ref={this.indicator}>
-                        <span>
-                            {message}
-                        </span>
-                    </div>
+                    <Indicator message={message} />
                 }
                 <WaveBottom text="Create Account" />
                 <form>
