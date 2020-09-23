@@ -39,7 +39,7 @@ class HomeScreen extends Component {
 
     render() {
         const align = { textAlign: "center", opacity: 0.6 }
-        const { name } = this.props;
+        const { name, profilePicture } = this.props;
 
         return (
             <div>
@@ -85,7 +85,8 @@ class HomeScreen extends Component {
                         <ChatBox
                             inMenu
                             notLink
-                            img_src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg"
+                            updatingImage
+                            img_src={profilePicture}
                             name={name}
                             lastMessage=''
                         />
@@ -102,6 +103,7 @@ class HomeScreen extends Component {
 const mapStateToProps = (state) => {
     return {
         name: `${state.auth.user.first_name} ${state.auth.user.last_name}`,
+        profilePicture: state.profile.profilePicture,
         ...state.messages
     }
 

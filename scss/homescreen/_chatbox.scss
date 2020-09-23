@@ -32,6 +32,7 @@
            height: 55px;
            border-radius: 20px;
            position: relative;
+           @include centerize();
 
            &.online::after {
                position: absolute;

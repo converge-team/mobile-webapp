@@ -28,7 +28,7 @@ const authentication = (state = initialAuthState, action) => {
             return {};
         case authConstants.EMAIL_VERIFIED_FAIL:
             return { ...state, emailVerification: false };
-        
+
         default:
             return state;
     }

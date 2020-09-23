@@ -33,6 +33,10 @@ a {
     height: 100%;
 }
 
+.dark-bg {
+    background: #000;
+}
+
 .icons {
     display: flex;
 
@@ -177,4 +181,8 @@ button {
     &.column {
         flex-direction: column !important;
     }
+}
+
+.cropper-wrap-box {
+    background: #000;
 }

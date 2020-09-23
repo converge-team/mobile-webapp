@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import { connect } from 'react-redux';
-import { logout } from '../_actions/auth.actions'
+import { changePhotoBlob, updatingProfile } from '../_actions/profile.actions'
+import { logout } from '../_actions/auth.actions';
 
 class Settings extends Component {
 
-    // componentDidMount() {
-    //     console.log(this.props.user);
-    // }
-
     render() {
-        const { user } = this.props;
+        const { user, history, profilePicture, profileChangeState } = this.props;
         return (
             <div className="settings">
                 <SecondaryTopBar
@@ -27,16 +24,34 @@ class Settings extends Component {
                 <div className="chat_box">
                     <div className="profile_picture_div">
                         <div className="img_cover">
-                            <img className="profile_img" src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" alt="You"/>
+                            {
+                                profileChangeState === 'updating'
+                                    ? <svg className="circle-loader progress" width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="20" cy="20" r="15" />
+                                    </svg>
+                                    : <img className="profile_img" src={profilePicture} alt="You" />
+
+                            }
                         </div>
                     </div>
                     <div className="info">
                         <h3 className="friend_name">{`${user.first_name} ${user.last_name}`}</h3>
                         <p className="last_message" style={{ color: "rgba(0,0,0,.6)" }}>+2348148243489</p>
                     </div>
-                    <div className="camera" onClick={() => console.log('clicked')}>
+                    <label htmlFor="image" className="camera">
                         <i className="fas fa-camera"></i>
-                    </div>
+                    </label>
+                    <input
+                        onChange={(e) => {
+                            const file = e.target.files[0];
+                            const url = URL.createObjectURL(file);
+                            this.props.changeBlob({ url, type: file.type });
+                            history.push('/change-photo');
+                        }}
+                        type="file"
+                        id="image"
+                        accept="image/webp, image/jpg, image/jpeg, image/png"
+                    />
                 </div>
                 <div className="user-info">
                     <h3>Account</h3>
@@ -54,7 +69,7 @@ class Settings extends Component {
                     </div>
                 </div>
                 <div className="user-info">
-                    <button className="danger" 
+                    <button className="danger"
                         onClick={() => {
                             this.props.logout();
                             window.location.reload(false);
@@ -68,13 +83,16 @@ class Settings extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        profilePicture: state.profile.profilePicture,
+        profileChangeState: state.profile.profileChangeState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(logout())
+        logout: () => dispatch(logout()),
+        changeBlob: (blob) => dispatch(changePhotoBlob(blob)),
     }
 }
 

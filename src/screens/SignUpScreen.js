@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { register } from '../_actions/auth.actions'
-import service from '../_services/services';
+import service from '../services/services';
 
 import WaveBottom from '../_components/WaveBottom';
 import Indicator from '../_components/Indicator';

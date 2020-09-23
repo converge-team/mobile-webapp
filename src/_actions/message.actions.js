@@ -1,5 +1,5 @@
 
-import service from '../_services/services';
+import service from '../services/services';
 
 export const messageConstants = {
     FETCHING_MESSAGES: 'FETCHING_MESSAGES',

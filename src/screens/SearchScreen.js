@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
-import service from '../_services/services';
+import service from '../services/services';
 
 import SecondaryTopBar from '../_components/SecondaryTopBar';
 import ChatBox from '../_components/ChatBox';

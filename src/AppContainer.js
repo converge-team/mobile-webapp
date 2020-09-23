@@ -14,8 +14,9 @@ import LoadScreen from './_components/LoadScreen';
 import { loginSuccess, logout } from './_actions/auth.actions';
 
 
-import service from './_services/services';
+import service from './services/services';
 import SearchScreen from './screens/SearchScreen';
+import ChangePhotoScreen from './screens/ChangePhotoScreen';
 
 // This Component houses all secure roots. So that socket initialization can 
 // happen here only when authenticated.
@@ -27,7 +28,8 @@ class AppContainer extends Component {
         super(props);
         this.state = {
             socketConnected: false,
-            error: false
+            error: false,
+            photoBlob: ''
         }
         this.socketRef = React.createRef();
     }
@@ -85,6 +87,10 @@ class AppContainer extends Component {
                         dispatch(stopTyping(username))
                     });
 
+                    socket.on('new_profile_photo', (data) => {
+                        console.log('new photo >>> ', data)
+                    })
+
                     socket.on('online', (data) => {
                         dispatch(userOnline(data));
                     })
@@ -120,6 +126,7 @@ class AppContainer extends Component {
                             <PrivateRoute path="/settings" component={Settings} />
                             <PrivateRoute socket={socket} path="/profile/:id" component={FriendProfile} />
                             <PrivateRoute path="/search" component={SearchScreen} />
+                            <PrivateRoute path="/change-photo" component={ChangePhotoScreen} />
                         </Fragment>
                         : !this.state.error
                             ? <LoadScreen homePage={true} />

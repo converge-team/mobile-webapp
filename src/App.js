@@ -15,6 +15,7 @@ import AppContainer from './AppContainer';
 
 
 import './assets/css/style.css';
+import 'cropperjs/dist/cropper.css';
 
 class App extends Component {
 
