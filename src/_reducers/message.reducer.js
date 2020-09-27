@@ -46,6 +46,13 @@ const messages = (state = initialMessagesState, action) => {
                         : person
                 )
             };
+        case messageConstants.NEW_FRIEND_PROFILE_PHOTO:
+            return {
+                ...state,
+                persons: state.persons.map(person => (
+                    person._id === action.from ? { ...person, profile_photo: action.url } : person
+                ))
+            }
         case messageConstants.TYPING:
             return {
                 ...state,

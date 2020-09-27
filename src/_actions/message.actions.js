@@ -7,6 +7,7 @@ export const messageConstants = {
     FETCHED_MESSAGES_FAIL: 'FETCHED_MESSAGES_FAIL',
     NO_MESSAGE: 'NO_MESSAGE',
     NEW_MESSAGE: 'NEW_MESSAGE',
+    NEW_FRIEND_PROFILE_PHOTO: 'NEW_FRIEND_PROFILE_PHOTO',
     TYPING: 'TYPING',
     STOP_TYPING: 'STOP_TYPING',
     USER_ONLINE: 'USER_ONLINE',
@@ -74,6 +75,11 @@ export const newMessage = (userId, msgObj) => {
         msgObj
     }
 }
+
+export const newFriendProfilePhoto = (data) => ({
+    type: messageConstants.NEW_FRIEND_PROFILE_PHOTO,
+    ...data
+})
 
 const messageFetchFail = () => {
     return {

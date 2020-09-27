@@ -7,14 +7,13 @@ const ChatBoxesCover = ({ persons }) => {
         
         if(person.messages.length === 0) return
 
-
         let lastMessage = person.messages[person.messages.length-1] //e.g person['jeff'].messages
         let lastMessageTime = new Date(lastMessage.time);
         let dateDifference = new Date().getDay() - lastMessageTime.getDay(); // check difference in date
         return (
             <ChatBox 
                 key={person._id}
-                img_src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg"
+                img_src={person.profile_photo || 'https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg'}
                 name={`${person.first_name} ${person.last_name}`}
                 lastMessage={`${lastMessage.content}`}
                 id={person._id}

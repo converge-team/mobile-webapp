@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 
-import { userOnline, userOffline, typing, stopTyping, newMessage, fetchAllMessages, addFriend, fetchMessageForFriend } from './_actions/message.actions'
+import { userOnline, userOffline, typing, stopTyping, newMessage, fetchAllMessages, addFriend, fetchMessageForFriend, newFriendProfilePhoto } from './_actions/message.actions'
 
 import PrivateRoute from './_components/PrivateRoute';
 import { Settings } from './screens/SettingsScreen';
@@ -88,7 +88,7 @@ class AppContainer extends Component {
                     });
 
                     socket.on('new_profile_photo', (data) => {
-                        console.log('new photo >>> ', data)
+                        dispatch(newFriendProfilePhoto(data));
                     })
 
                     socket.on('online', (data) => {
