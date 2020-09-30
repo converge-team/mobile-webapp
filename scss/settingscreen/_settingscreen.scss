@@ -16,6 +16,7 @@
             border-radius: 50%;
             @include centerize();
             z-index: 4;
+            box-shadow: 0 2px 4px rgba(0,0,0,.4);
 
             &>i {
                 font-size: 20px;

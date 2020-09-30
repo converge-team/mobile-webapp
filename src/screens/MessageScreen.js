@@ -18,12 +18,12 @@ class MessageScreen extends Component {
 
     componentDidMount() {
         const { dispatch, match, location, data } = this.props;
-        
+
         console.log('data for unconfirmed: ', data);
 
         dispatch(screenLoaded('message_screen'));
-        
-        if(data && data.unconfirmed) {
+
+        if (data && data.unconfirmed) {
             dispatch(addFriend(match.params.id));
         } else if (query('new', location.search) !== 'true') {
             dispatch(fetchMessageForFriend(match.params.id));
@@ -40,7 +40,7 @@ class MessageScreen extends Component {
         if (fetchedMessagesForPerson === match.params.id) {
             const { data } = this.props;
 
-            if (data.socketId) 
+            if (data.socketId)
                 socket.emit('join', { friend: data.username, socketId: data.socketId });
 
             if (!data.socketId && !data.lastSeen) {
@@ -83,24 +83,27 @@ class MessageScreen extends Component {
                                     <div className="chat_box">
                                         <div className="profile_picture_div">
                                             <div className="img_cover">
-                                                <img src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" className="profile_img" alt={`${data.username}`} />
+                                                <img src={data.profile_photo || "https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg"} className="profile_img" alt={`${data.username}`} />
                                             </div>
                                         </div>
-                                        <div className="info">
-                                            <div className="friend_name">
-                                                <h3 className="friend_name">{`${data.first_name} ${data.last_name}`}</h3>
+                                        <div className="chatbox-other">
+                                            <div className="info">
+                                                <div className="friend_name">
+                                                    <h3 className="friend_name">{`${data.first_name} ${data.last_name}`}</h3>
+                                                </div>
+                                                <p className="last_message">
+                                                    {data.typing ?
+                                                        "typing..."
+                                                        : data.socketId
+                                                            ? "online"
+                                                            : data.lastSeen
+                                                                ? `last seen ${parseDate(data.lastSeen).prefixTime}`
+                                                                : ''
+                                                    }
+                                                </p>
                                             </div>
-                                            <p className="last_message">
-                                                {data.typing ?
-                                                    "typing..."
-                                                    : data.socketId
-                                                        ? "online"
-                                                        : data.lastSeen
-                                                            ? `last seen ${parseDate(data.lastSeen).prefixTime}`
-                                                            : ''
-                                                }
-                                            </p>
                                         </div>
+
                                     </div>
                                 </Link>
                             }

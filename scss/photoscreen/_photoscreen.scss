@@ -1,0 +1,30 @@
+
+.photo-screen {
+
+    .top {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: $sidepadding;
+        @include centerize($justify: flex-start);
+
+        .touch_indicator {
+            background: transparent;
+
+            i {
+                color: white;
+            }
+        }
+    }
+
+    .background {
+        background: #000;
+        @include centerize();
+
+        &>img {
+            display: block;
+
+            max-width: 100%;
+        }
+    }
+}

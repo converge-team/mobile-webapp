@@ -26,10 +26,10 @@ class FriendProfile extends Component {
     }
 
     render() {
-        const { friend } = this.props;
-        const { match } = this.props;
+        const { friend, match, fetchedMessages } = this.props;
 
         return (
+            fetchedMessages &&
             !this.state.redirect ?
                 <div className="settings">
                     <SecondaryTopBar
@@ -38,7 +38,9 @@ class FriendProfile extends Component {
                         id={this.props.match.params.id}
                     />
                     <ChatBox
-                        img_src="https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg"
+                        notLink
+                        linkToPicture={friend.username}
+                        img_src={ friend.profile_photo || "https://cdn.pixabay.com/photo/2017/01/18/17/14/girl-1990347_960_720.jpg" }
                         name={`${friend.first_name} ${friend.last_name}`}
                         lastMessage={`Online`}
                     />
@@ -56,6 +58,7 @@ class FriendProfile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        fetchedMessages: state.messages.fetchedMessages,
         friend: state.messages.persons.find(person =>
             person._id === ownProps.match.params.id
         ),

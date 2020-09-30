@@ -33,6 +33,7 @@
            border-radius: 20px;
            position: relative;
            @include centerize();
+           transition: 200ms ease-out;
 
            &.online::after {
                position: absolute;
@@ -52,46 +53,70 @@
                height: 100%;
                border-radius: inherit;
            }
+
+        //    &.open {
+        //        z-index: 5;
+        //        background: #000;
+        //        border-radius: 0;
+        //        position: fixed;
+        //        top: 0;
+        //        left: 0;
+        //        width: 100vh;
+        //        height: 100vh;
+
+        //        &>img {
+        //            display: block;
+                
+        //            max-width: 100%;
+        //            max-height: 90%;
+        //        }
+        //    }
         }
     }
 
-    .info {
+
+    .chatbox-other {
         flex-grow: 1;
-
-        .friend_name {
-            margin: 2px 0;
-        }
-        .last_message {
-            margin: 2px 0;
-            font-size: 13px;
-            color: rgba($color: $themecolor, $alpha: 0.9);
-            
-        }
-    }
-
-    .indicators {
         @include centerize();
-        flex-direction: column;
-        justify-content: space-evenly;
-        // width: 50px;
-        height: inherit;
-        padding: 8px $sidepadding;
-
-        .time_indicator {
-            font-size: 12px;
-            color: rgba(0, 0, 0, .5)
+        .info {
+            flex-grow: 1;
+            
+            .friend_name {
+                margin: 2px 0;
+            }
+            .last_message {
+                margin: 2px 0;
+                font-size: 13px;
+                color: rgba($color: $themecolor, $alpha: 0.9);
+                
+            }
         }
-
-        .unread_indicator {
+    
+        .indicators {
             @include centerize();
-            width: 20px;
-            height: 20px;
-            color: white;
-            background: $themecolor;
-            border-radius: 50%;
-            font-size: 12px
+            flex-direction: column;
+            justify-content: space-evenly;
+            // width: 50px;
+            height: inherit;
+            padding: 8px $sidepadding;
+    
+            .time_indicator {
+                font-size: 12px;
+                color: rgba(0, 0, 0, .5)
+            }
+    
+            .unread_indicator {
+                @include centerize();
+                width: 20px;
+                height: 20px;
+                color: white;
+                background: $themecolor;
+                border-radius: 50%;
+                font-size: 12px
+            }
         }
     }
+
 }
 
 .chat_boxes_cover {

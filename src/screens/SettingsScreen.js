@@ -23,7 +23,10 @@ class Settings extends Component {
 
                 <div className="chat_box">
                     <div className="profile_picture_div">
-                        <div className="img_cover">
+                        <div 
+                            className="img_cover"
+                            onClick={() => history.push(`/your-photo`)}
+                        >
                             {
                                 profileChangeState === 'updating'
                                     ? <svg className="circle-loader progress" width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -34,9 +37,11 @@ class Settings extends Component {
                             }
                         </div>
                     </div>
-                    <div className="info">
-                        <h3 className="friend_name">{`${user.first_name} ${user.last_name}`}</h3>
-                        <p className="last_message" style={{ color: "rgba(0,0,0,.6)" }}>+2348148243489</p>
+                    <div className="chatbox-other">
+                        <div className="info">
+                            <h3 className="friend_name">{`${user.first_name} ${user.last_name}`}</h3>
+                            <p className="last_message" style={{ color: "rgba(0,0,0,.6)" }}>+2348148243489</p>
+                        </div>
                     </div>
                     <label htmlFor="image" className="camera">
                         <i className="fas fa-camera"></i>

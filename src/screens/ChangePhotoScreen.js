@@ -55,7 +55,7 @@ class ChangePhotoScreen extends Component {
                     <ImageCover photoBlob={photoBlob && photoBlob.url} setCropperPointer={this.setCropperPointer} />
                 </div>
                 <div id="actions">
-                    <span>Cancel</span>
+                    <span onClick={() => history.goBack()}>Cancel</span>
                     <span
                         onClick={() => {
 

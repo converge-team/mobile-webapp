@@ -17,6 +17,7 @@ import { loginSuccess, logout } from './_actions/auth.actions';
 import service from './services/services';
 import SearchScreen from './screens/SearchScreen';
 import ChangePhotoScreen from './screens/ChangePhotoScreen';
+import PhotoScreen from './screens/PhotoScreen';
 
 // This Component houses all secure roots. So that socket initialization can 
 // happen here only when authenticated.
@@ -127,6 +128,8 @@ class AppContainer extends Component {
                             <PrivateRoute socket={socket} path="/profile/:id" component={FriendProfile} />
                             <PrivateRoute path="/search" component={SearchScreen} />
                             <PrivateRoute path="/change-photo" component={ChangePhotoScreen} />
+                            <PrivateRoute path="/photo/:username" exact component={PhotoScreen} />
+                            <PrivateRoute path="/your-photo/" exact owner component={PhotoScreen}/>
                         </Fragment>
                         : !this.state.error
                             ? <LoadScreen homePage={true} />
